@@ -1,13 +1,24 @@
 import GameInit from "./components/GameInit";
+import React from "react";
+import "bootstrap/dist/css/bootstrap.css";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+
+import Footer from "./components/Footer";
+import ExperimentalFooter from "./components/ExperimentalFooter";
+
+import NavbarDefault from "./components/Navbar";
+import PlayGame from "./components/PlayGame";
 
 function GamePage() {
   return (
-    <Container>
-      {gamecondition ? {<Game /> : <GameInit />}
-    </Container>
+    <>
+    <NavbarDefault />
+
+      {/* {gameStarted ? <PlayGame /> : <GameInit />} */}
+      <GameInit />
+
+    <ExperimentalFooter/>
+    </>
   );
 }
 

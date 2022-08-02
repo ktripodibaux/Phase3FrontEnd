@@ -1,0 +1,39 @@
+#headerText {
+  text-align: center;
+}
+
+.trivia_img{
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  display: block;
+  margin-top: 15px;
+}
+
+.instruction{
+  margin-top: 0px;
+}
+
+.test{
+  font-size: 45px;
+  text-align: center;
+}
+
+.card2{
+  position: relative;
+  float: right;
+}
+
+.user{
+  width: 175px;
+  height: 175px;
+}
+
+.footer{
+  position: fixed-bottom;
+  text-align: left;
+}
+
+body {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
