@@ -14,19 +14,120 @@
   margin-top: 0px;
 }
 
+
 .test{
-  font-size: 45px;
+  font-size: 40px;
   text-align: center;
 }
 
-.card2{
-  position: relative;
-  float: right;
+.questionTitle{
+  text-align: center;
+  font-size: 60px;
 }
+
+.answers{
+  margin-top: 7%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.users{
+  display: flex;
+  justify-content: space-between;
+}
+.space{
+  margin: 75% 0px;
+}
+
+.question{
+  text-align: justify;
+  font-size: 30px;
+  margin-top: 3%;
+}
+
+.round{
+  display: block;
+  margin-top: 15%;
+  font-size: 40px;
+
+  text-align: center;
+}
+
+.turn{
+  display: block;
+
+  font-size: 35px;
+  margin-top: 30px;
+  text-align: center;
+}
+
+
+
+
+
+
+.separate{
+  display: block;
+  margin-bottom: 100px;
+}
+
+.questionHolder{
+  width: 60%;
+  height: 100%;
+  padding: 20px;
+  padding-top: 7%;
+}
+.filler{
+  width: 30%;
+}
+
+/* .right{
+  float: right;
+  display: flex;
+  flex-direction: column;
+  /* margin: auto; */
+  /* right: 0px; */
+
+  /* width: 10%;
+  height: 100%; */
+  /* align-items: stretch; */
+  /* flex: auto;
+  gap: 100px; */
+  /* flex-grow: 3; */
+  /* justify-content: flex-end; */
+  /* align-items: top; */
+/* }  */
+
+.right{
+  padding-top: 20px;
+  width: 20%;
+  height: 100%;
+}
+
+
+
+.left{
+  padding-top: 20px;
+  /* float: left; */
+  width: 20%;
+  height: 100%;
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* flex-direction: row; */
+}
+
+
+
+
+
+
 
 .user{
   width: 175px;
   height: 175px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .footer{

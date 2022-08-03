@@ -6,7 +6,7 @@ function NavbarDefault({ props }) {
   return (
     <Navbar bg="primary" variant="dark">
         {/* <Container> */}
-          <Navbar.Brand href="#home">Cracking the Code</Navbar.Brand>
+          <Navbar.Brand href="/game">Cracking the Code</Navbar.Brand>
           <Nav className="ml-auto">
             <Nav.Link href="/game">Play</Nav.Link>
             <Nav.Link href="/leaderboard">Leaderboard</Nav.Link>

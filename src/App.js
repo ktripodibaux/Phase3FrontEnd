@@ -9,7 +9,7 @@ import PlayGame from "./components/PlayGame";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<GamePage />}></Route>
+      <Route path="/game" element={<GamePage />}></Route>
       <Route path="/game" element={<GamePage />}></Route>
       <Route path="/test" element={<PlayGame />}></Route>
       {/* <Route path=":invoiceId" element={<Invoice />} />
