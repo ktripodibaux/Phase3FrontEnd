@@ -17,13 +17,13 @@ function InitialForm({start, save}) {
   }
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(form)
+    // console.log(form)
     start()
     save(form)
     
     //Post the inputted usernames and image URL's to the server
     
-    fetch( "http://localhost:4001/users" , {
+    fetch( "http://localhost:9292/users" , {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( form )

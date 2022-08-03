@@ -11,11 +11,16 @@ import { useState } from "react";
 
 function PlayGame({users}){
 
-    console.log(users)
+    // console.log(users[1])
+    
+    // users.forEach((user)=>{
+    //     console.log(user)
+       
+    // })
 
-    const playerCards = users.forEach(element => {
-        return <PlayerCard user={element} />
-    });
+    
+
+
 
 
 
@@ -23,7 +28,6 @@ function PlayGame({users}){
 
     return(
         <>
-        {/* <NavbarDefault /> */}
         
         <div className="holder d-flex">
             
@@ -31,9 +35,10 @@ function PlayGame({users}){
             <Container fluid className="m-auto">
                     <Row>
                         <Col className="justify-content-md-center">
-                            <PlayerCard />
+                            <PlayerCard type={1} user={users[0]} />
+                          
                             <div className="space"></div>
-                            <PlayerCard />
+                            <PlayerCard type={2} user={users[1]}/>
                         </Col>
                     </Row>
             
@@ -49,9 +54,9 @@ function PlayGame({users}){
                 <Container fluid className="m-auto">
                     <Row>
                         <Col className="justify-content-md-center">
-                            <PlayerCard />
+                            <PlayerCard type={3} user={users[2]} />
                             <div className="space"></div>
-                            <PlayerCard />
+                            <PlayerCard type={4} user={users[3]} />
                         </Col>
                     </Row>
             

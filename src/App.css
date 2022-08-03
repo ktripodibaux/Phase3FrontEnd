@@ -14,6 +14,16 @@
   margin-top: 0px;
 }
 
+.leadercard{
+  margin: 10px;
+  text-overflow: clip;
+  text-align: center;
+}
+.leadercard img{
+  width: 100px;
+  float: left;
+}
+
 
 .test{
   font-size: 40px;

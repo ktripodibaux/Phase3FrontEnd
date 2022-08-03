@@ -1,16 +1,44 @@
 
+import React, {useState, useEffect} from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 function QuestionCard(){
+    
+    const [questions, setQuestions] = useState({})
+
+    const fetchQuestions = () => {
+    fetch("http://localhost:9292/questions")
+        .then(res => res.json())
+        .then(data => setQuestions(data))
+    }
+    useEffect(fetchQuestions, [])
+
+    // :) lol
+
+
+    //Random number generator for the question ID
+
+    const questionID = [];
+   
+    const generateQuestionID = () => {
+        let questionID = Math.floor(Math.random() * 41)
+        console.log(questionID)
+        return questionID
+    }
+        
+    
+    
     return (
         <>
         {/* className="col-sm-6 p-3 mb-2 bg-danger text-white userCard" */}
-        <Card>
-            <Card.Title ></Card.Title>
+        {generateQuestionID()}
+        <Card onClick={generateQuestionID}>
+            <Card.Title >Question #{questionID} </Card.Title>
             <Card.Body>
             <Card.Text className='question'>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum?
+                Loren ipsum for now
+            {/* {questions[questionID].question} */}
             </Card.Text>
             <div className='answers'>
                 <Button variant="primary">Answer</Button>
