@@ -5,6 +5,7 @@ import Image from 'react-bootstrap/Image'
 function PlayerCard({user, type}){
 
 //    console.log(user)
+//    console.log('test', user)
 
     let style;
 
@@ -27,7 +28,7 @@ function PlayerCard({user, type}){
         <Card className={`sm p-3 mb-2 bg-${style} text-white d-lg-flex`} >
             <Image className='user img-thumbnail' v-bind="mainProps" variant="right" rounded alt="Rounded image"  src={user.image}></Image>
             <Card.Text className="test">{user.name ? user.name : "User"}</Card.Text>
-            <Card.Text className="test">Score: </Card.Text>
+            <Card.Text className="test">Score: {user.score}</Card.Text>
         </Card>
         </>
     )

@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import { useState } from "react";
 
 
-function PlayGame({users}){
+function PlayGame({users, updateUsers}){
 
     const [playerTurn, setPlayerTurn] = useState(1)
 
@@ -22,9 +22,38 @@ function PlayGame({users}){
         }
     }
 
-    function updateScore(){
-        
+    
+
+    function raiseUserScore(name){
+        // let id;
+        fetch('http://localhost:9292/users').then(res=>res.json()).then(data=>{
+            // console.log(data)
+            for(let i = data.length-4; i < data.length; i++){
+                // console.log(data[i].name)
+                if (data[i].name == name){
+                    // console.log("found", data[i].id)
+                    // console.log(data[i].id)
+                    // id = data[i].id
+                    fetch(`http://localhost:9292/users/${data[i].id}`, {
+                        method: 'PATCH',
+                        headers: {'Content-type': 'application/json'}
+                    })
+                }
+            }
+
+        })
+
+        const newArray = [...users]
+        newArray.forEach(n=>{
+            if (n.name == name){
+                n.score += 1
+            }
+        })
+
+        updateUsers(newArray)
+
     }
+
 
     
 
@@ -37,7 +66,8 @@ function PlayGame({users}){
     return(
         <>
         <div className="holder d-flex">
-            <button onClick={handleTurnChange} />
+            {/* <button onClick={handleTurnChange} /> */}
+            <button onClick={()=>raiseUserScore(users[1].name)} />
             <div className="left ">
             <Container fluid className="m-auto">
                     <Row>

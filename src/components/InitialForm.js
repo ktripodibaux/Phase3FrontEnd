@@ -14,15 +14,10 @@ function InitialForm({start, save}) {
       ...form,
       [field]:value
     })
+    console.log(form)
   }
   const handleSubmit = e => {
     e.preventDefault()
-    // console.log(form)
-    start()
-    save(form)
-    
-    //Post the inputted usernames and image URL's to the server
-    
     fetch( "http://localhost:9292/users" , {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
@@ -30,6 +25,12 @@ function InitialForm({start, save}) {
       } )
       .then( response => response.json() )
       .then( console.log )
+    console.log('i was clicked')
+    start()
+    save(form)
+    
+    //Post the inputted usernames and image URL's to the server
+    
   }
   
 

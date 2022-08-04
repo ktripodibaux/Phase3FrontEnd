@@ -51,30 +51,39 @@ function GamePage() {
     const dName= "User"
 
     const user1 = {
-      name: input.player1Name,
-      image:  input.player1Picture ? input.player1Picture : dImage
+      name: input.player1Name ? input.player1Name : "Player 1",
+      image:  input.player1Picture ? input.player1Picture : dImage,
+      score: 0
     }
     const user2 = {
-      name: input.player2Name,
-      image: input.player2Picture ? input.player2Picture : dImage
+      name: input.player2Name ? input.player2Name : "Player 2",
+      image: input.player2Picture ? input.player2Picture : dImage,
+      score: 0
     }
     const user3 = {
-      name: input.player3Name,
-      image: input.player3Picture ? input.player3Picture : dImage
+      name: input.player3Name ? input.player3Name : "Player 3",
+      image: input.player3Picture ? input.player3Picture : dImage,
+      score: 0
     }
     const user4 = {
-      name: input.player4Name,
-      image: input.player4Picture ? input.player4Picture : dImage
+      name: input.player4Name ? input.player4Name : "Player 4",
+      image: input.player4Picture ? input.player4Picture : dImage,
+      score: 0
     }
 
-    setUsers([user1,user2,user3,user4])
+    updateUsers([user1, user2, user3, user4])
+  }
+
+
+  function updateUsers(array){
+    setUsers(array)
   }
   
   return (
     <>
     <NavbarDefault />
 
-      {gameStarted ? <PlayGame users={users} /> : <GameInit save={savePlayers} start={handleGameStart}/>}
+      {gameStarted ? <PlayGame  users={users} updateUsers={updateUsers}/> : <GameInit save={savePlayers} start={handleGameStart}/>}
 
 
     <ExperimentalFooter/>
