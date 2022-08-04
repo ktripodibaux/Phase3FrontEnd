@@ -12,6 +12,8 @@ import { useState } from "react";
 function PlayGame({users, updateUsers}){
 
     const [playerTurn, setPlayerTurn] = useState(1)
+    const [questionTotal, setQuestionTotal] = useState(1)
+    const [round, updateRound] = useState(1)
 
 
     function handleTurnChange(){
@@ -20,6 +22,21 @@ function PlayGame({users, updateUsers}){
         } else{
             setPlayerTurn(playerTurn + 1)
         }
+
+        setQuestionTotal(questionTotal + 1)
+
+        if (questionTotal == 12){
+            //after question 12 round 2
+            updateRound(2)
+        }
+        if(questionTotal == 24){
+            //after question 24 round 3
+            updateRound(3)
+        }
+        if(questionTotal == 30){
+            //initiate game end after question 30
+        }
+
     }
 
     
@@ -42,6 +59,7 @@ function PlayGame({users, updateUsers}){
             }
 
         })
+
 
         const newArray = [...users]
         newArray.forEach(n=>{
@@ -67,7 +85,7 @@ function PlayGame({users, updateUsers}){
         <>
         <div className="holder d-flex">
             {/* <button onClick={handleTurnChange} /> */}
-            <button onClick={()=>raiseUserScore(users[1].name)} />
+            <button onClick={handleTurnChange} />
             <div className="left ">
             <Container fluid className="m-auto">
                     <Row>
@@ -82,9 +100,11 @@ function PlayGame({users, updateUsers}){
                 </Container>
             </div>
             <div className="questionHolder">
-            <h1 className='questionTitle'>Question #1:</h1>
+                <button onClick={()=>raiseUserScore(users[playerTurn-1].name)}>update current player score</button>
+                <button onClick={handleTurnChange}> update turn and question number</button>
+            <h1 className='questionTitle'>Question #{questionTotal}:</h1>
                 <QuestionCard />
-                <h3 className="round">Round 1</h3>
+                <h3 className="round">Round {round}</h3>
                 <h4 className="turn">User {playerTurn}'s Turn</h4>
             </div>
             <div className="right">
