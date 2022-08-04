@@ -4,17 +4,17 @@ import Image from 'react-bootstrap/Image'
 
 function PlayerCard({user, type}){
 
-   console.log(type)
+//    console.log(user)
 
     let style;
 
-    if (type == 1){
+    if (type === 1){
         style = "primary"
-    } else if (type == 2){
+    } else if (type === 2){
         style = "danger"
-    }else if (type == 3){
+    }else if (type === 3){
         style = "success"
-    }else if (type == 4){
+    }else if (type === 4){
         style = "warning"
     } else{
         style = "info"

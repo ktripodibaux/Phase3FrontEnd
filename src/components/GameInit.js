@@ -11,7 +11,7 @@ function GameInit({start, save}) {
   return (
     <>
     <Container fluid="sm">
-      <img className="trivia_img" src = "https://r67.cooltext.com/rendered/cooltext416702479298098.png"/>
+      <img className="trivia_img" src = "https://flamingtext.com/net-fu/proxy_form.cgi?script=water-logo&text=CTC+Trivia&_loc=generate&imageoutput=true"/>
     {/* <img className="trivia_img" src="https://upload.wikimedia.org/wikipedia/en/2/27/Trivia.png" /> */}
     <InitialForm save={save} start={start}/>
     <br></br>

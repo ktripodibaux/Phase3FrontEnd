@@ -11,12 +11,20 @@ import { useState } from "react";
 
 function PlayGame({users}){
 
-    // console.log(users[1])
-    
-    // users.forEach((user)=>{
-    //     console.log(user)
-       
-    // })
+    const [playerTurn, setPlayerTurn] = useState(1)
+
+
+    function handleTurnChange(){
+        if (playerTurn === 4) {
+            setPlayerTurn(1)
+        } else{
+            setPlayerTurn(playerTurn + 1)
+        }
+    }
+
+    function updateScore(){
+        
+    }
 
     
 
@@ -28,9 +36,8 @@ function PlayGame({users}){
 
     return(
         <>
-        
         <div className="holder d-flex">
-            
+            <button onClick={handleTurnChange} />
             <div className="left ">
             <Container fluid className="m-auto">
                     <Row>
@@ -48,7 +55,7 @@ function PlayGame({users}){
             <h1 className='questionTitle'>Question #1:</h1>
                 <QuestionCard />
                 <h3 className="round">Round 1</h3>
-                <h4 className="turn">User 1's Turn</h4>
+                <h4 className="turn">User {playerTurn}'s Turn</h4>
             </div>
             <div className="right">
                 <Container fluid className="m-auto">
