@@ -39,6 +39,12 @@ function PlayGame({users, updateUsers}){
 
     }
 
+    function talkWithQuestionCard(event){
+
+        console.log(event)
+
+    }
+
     
 
     function raiseUserScore(name){
@@ -111,7 +117,7 @@ useEffect(()=> {
                 <button onClick={()=>raiseUserScore(users[playerTurn-1].name)}>update current player score</button>
                 <button onClick={handleTurnChange}> update turn and question number</button>
             <h1 className='questionTitle'>Question #{questionTotal}:</h1>
-                <QuestionCard arrayOfQuestionNumbers = {arrayOfNumbers}/>
+                <QuestionCard handleScore={talkWithQuestionCard} arrayOfQuestionNumbers = {arrayOfNumbers}/>
                 <h3 className="round">Round {round}</h3>
                 <h4 className="turn">User {playerTurn}'s Turn</h4>
             </div>

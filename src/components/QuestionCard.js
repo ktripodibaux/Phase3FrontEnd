@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-function QuestionCard({arrayOfQuestionNumbers}){
+function QuestionCard({arrayOfQuestionNumbers, handleScore}){
 
     console.log("Are the props being passed?", arrayOfQuestionNumbers[0])
     
@@ -54,6 +54,7 @@ function QuestionCard({arrayOfQuestionNumbers}){
       },[question.incorrect_answer])
 
     const handleClick = (event) => {
+        handleScore(event)
         if (event.target.value === question.correct_answer)
         fetch("http://localhost:9292/users/17", {
             method: "PATCH",
@@ -88,7 +89,7 @@ function QuestionCard({arrayOfQuestionNumbers}){
         )
     })
     const increaseX = ()=>{
-        setX(x++)
+        setX(x + 1)
     }
     
     console.log(x)
