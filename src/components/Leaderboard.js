@@ -28,7 +28,7 @@ function Leaderboard(){
     return(
         <>
         <NavbarDefault />
-        <Container >
+        <Container fluid="sm">
         <h1 className="questionTitle">Highest scoring players</h1>
             {users ? usersArray : undefined}
 

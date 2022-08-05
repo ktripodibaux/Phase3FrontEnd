@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import QuestionCard from "./QuestionCard";
 import Button from 'react-bootstrap/Button';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 function PlayGame({users, updateUsers}){
@@ -72,9 +72,17 @@ function PlayGame({users, updateUsers}){
 
     }
 
+    const [arrayOfNumbers, setArrayOfNumbers] = useState([])
 
+useEffect(()=> {
     
+        fetch(`http://localhost:9292/questions/round/1`)
+        .then(r=>r.json())
+        .then(data => setArrayOfNumbers(data) )
+    
+}, [])
 
+    //fetchArrayOfQuestionNumbers(1)
 
 
 
@@ -91,7 +99,7 @@ function PlayGame({users, updateUsers}){
                     <Row>
                         <Col className="justify-content-md-center">
                             <PlayerCard type={1} user={users[0]} />
-                          
+                            
                             <div className="space"></div>
                             <PlayerCard type={2} user={users[1]}/>
                         </Col>
@@ -103,7 +111,7 @@ function PlayGame({users, updateUsers}){
                 <button onClick={()=>raiseUserScore(users[playerTurn-1].name)}>update current player score</button>
                 <button onClick={handleTurnChange}> update turn and question number</button>
             <h1 className='questionTitle'>Question #{questionTotal}:</h1>
-                <QuestionCard />
+                <QuestionCard arrayOfQuestionNumbers = {arrayOfNumbers}/>
                 <h3 className="round">Round {round}</h3>
                 <h4 className="turn">User {playerTurn}'s Turn</h4>
             </div>
