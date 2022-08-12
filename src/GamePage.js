@@ -49,32 +49,41 @@ function GamePage() {
   function savePlayers(input){
     const dImage = 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'
     const dName= "User"
+    
+    let player1Score = 0
+    let player2Score = 0
+    let player3Score = 0
+    let player4Score = 0
+
 
     const user1 = {
       name: input.player1Name ? input.player1Name : "Player 1",
       image:  input.player1Picture ? input.player1Picture : dImage,
-      score: 0
+      score: player1Score
+
     }
+    
     const user2 = {
       name: input.player2Name ? input.player2Name : "Player 2",
       image: input.player2Picture ? input.player2Picture : dImage,
-      score: 0
+      score: player2Score
     }
     const user3 = {
       name: input.player3Name ? input.player3Name : "Player 3",
       image: input.player3Picture ? input.player3Picture : dImage,
-      score: 0
+      score: player3Score
     }
     const user4 = {
       name: input.player4Name ? input.player4Name : "Player 4",
       image: input.player4Picture ? input.player4Picture : dImage,
-      score: 0
+      score: player4Score
     }
-
+    
     updateUsers([user1, user2, user3, user4])
+    console.log("player1Score", player1Score)
   }
-
-
+  
+  
   function updateUsers(array){
     setUsers(array)
   }

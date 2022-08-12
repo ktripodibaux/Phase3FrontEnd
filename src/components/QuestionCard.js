@@ -1,16 +1,22 @@
-
 import React, {useState, useEffect} from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-function QuestionCard({arrayOfQuestionNumbers, handleScore}){
+function QuestionCard({arrayOfQuestionNumbers, handleScore, handleWrong}){
 
     console.log("Are the props being passed?", arrayOfQuestionNumbers[0])
     
     const [question, setQuestions] = useState([])
     const [answers , setAnswers] = useState([])
+    const [start, setStart] = useState(false)
     
-    const [x , setX] = useState([])
+    const [x , setX] = useState(0)
+
+
+    function handleStart(){
+        setStart(true)
+    }
+
     useEffect(()=>{
         //for (let i = 0; i < arrayOfQuestionNumbers.length; i++) {
         
@@ -29,7 +35,7 @@ function QuestionCard({arrayOfQuestionNumbers, handleScore}){
         // for (i of arrayOfQuestionNumbers) {
         //}    
         
-    fetch(`http://localhost:9292/questions/${arrayOfQuestionNumbers[0]}`) 
+    fetch(`http://localhost:9292/questions/${arrayOfQuestionNumbers[x]}`) 
         .then(res => res.json())
         .then(data => setQuestions(data))
         //.then(data => data.incorrect_answer.split(','))
@@ -48,41 +54,45 @@ function QuestionCard({arrayOfQuestionNumbers, handleScore}){
             
             let all_answers = [incorrect_answers[0], incorrect_answers[1], incorrect_answers[2], question.correct_answer]
             all_answers = getMultipleRandom(all_answers)
-            setAnswers(all_answers)
+            setAnswers(all_answers, arrayOfQuestionNumbers)
         })
     
-      },[question.incorrect_answer])
+      },[question.incorrect_answer, x])
 
     const handleClick = (event) => {
-        handleScore(event)
-        if (event.target.value === question.correct_answer)
-        fetch("http://localhost:9292/users/17", {
-            method: "PATCH",
-            headers: {
-              "Content-type": "application/json"
-            },
-            body: JSON.stringify()
-          })
-           .then(response => {
-              console.log(response.status); 
-              return response.json();
-            })
-            .then(data => console.log(data));
+        handleStart()
+        if (event.target.value === question.correct_answer){
+            handleScore()
+            setX(x + 1)
+        // fetch("http://localhost:9292/users/17", {
+        //     method: "PATCH",
+        //     headers: {
+        //       "Content-type": "application/json"
+        //     },
+        //     body: JSON.stringify()
+        //   })
+        //    .then(response => {
+        //       console.log(response.status); 
+        //       return response.json();
+        //     })
+        //     .then(data => console.log(data));
+        }
         //Write some code to see if answer was correct_answer
 
         // if (BUTTON CLICKED == question.correct_answer){
         //     POST TO THE SERVER INCREASING THAT USERS SCORE WHICH INCREASES ON THE GAMEPAGE AND LEADERBOARD 
         //     MOVES ON TO THE NEXT PLAYER
-        // } else {
-        //     alert("Continue to develop your developer skills, Developer. You're wrong.")
-        //     MOVES ON TO THE NEXT PLAYER
-        // }
+          else {
+            handleWrong()
+            alert("Continue to develop your developer skills, Developer. You're wrong.")
+            
+         }
         
         //fetchQuestion()
     }
 
 
-    const Test = answers.map((each) => {
+    const QuestionAnswers = answers.map((each) => {
         console.log(each)
         return(
             <Button variant="primary" onClick={handleClick} value={each}>{each}</Button>
@@ -93,6 +103,8 @@ function QuestionCard({arrayOfQuestionNumbers, handleScore}){
     }
     
     console.log(x)
+
+    const button = <Button variant="primary" onClick={increaseX} >Start</Button>
    
 
     
@@ -106,8 +118,11 @@ function QuestionCard({arrayOfQuestionNumbers, handleScore}){
           {question.question}
             </Card.Text>
             <div className='answers'>
-                {Test}
-                <Button variant="primary" onClick={increaseX} >next</Button>
+                {QuestionAnswers}
+
+              
+
+                {start ? null : button}
             </div>
         </Card.Body>
         </Card>

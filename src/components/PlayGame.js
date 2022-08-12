@@ -7,6 +7,9 @@ import Col from 'react-bootstrap/Col';
 import QuestionCard from "./QuestionCard";
 import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Redirect, Navigate, useNavigate } from 'react-router-dom';
+import GameOver from "./GameOver";
 
 
 function PlayGame({users, updateUsers}){
@@ -14,6 +17,7 @@ function PlayGame({users, updateUsers}){
     const [playerTurn, setPlayerTurn] = useState(1)
     const [questionTotal, setQuestionTotal] = useState(1)
     const [round, updateRound] = useState(1)
+    const [gameOver, setGameOver] = useState(false)
 
 
     function handleTurnChange(){
@@ -21,42 +25,84 @@ function PlayGame({users, updateUsers}){
             setPlayerTurn(1)
         } else{
             setPlayerTurn(playerTurn + 1)
+            console.log("user score: ", users[0].score)
         }
 
-        setQuestionTotal(questionTotal + 1)
+        
 
         if (questionTotal == 12){
             //after question 12 round 2
             updateRound(2)
-        }
-        if(questionTotal == 24){
-            //after question 24 round 3
-            updateRound(3)
-        }
-        if(questionTotal == 30){
-            //initiate game end after question 30
-        }
 
+            users.map(user=>{
+                console.log("End of game scores: ", user.score)
+            })
+
+            console.log("winner: ", findWinner())
+                //player1Score
+                
+                
+                
+                
+            }
+            if(questionTotal == 24){
+                //after question 24 round 3
+                updateRound(3)
+            }
+            if(questionTotal == 30){
+                //initiate game end after question 30\
+                
+                fetch("http://localhost:9292/results", {
+                    method: "POST",
+                    headers: {'Content-Type': "application/json"},
+                    body: JSON.stringify({
+                        player1Name: users[0].name,
+                        player1Picture: users[0].image,
+                        player1Score: users[0].score,
+                        player2Name: users[1].name,
+                        player2Picture: users[1].image,
+                        player2Score: users[1].score,
+                        player3Name: users[2].name,
+                        player3Picture: users[2].image,
+                        player3Score: users[2].score,
+                        player4Name: users[3].name,
+                        player4Picture: users[3].image,
+                        player4Score: users[3].score
+            
+                    })
+            
+                })
+            
+            
+                setGameOver(true)
+        
+                        //Result.create(name: params[:player1Name], userUrl: params[:player1Picture], score: [:player1Score]).to_json
+                    }
+    }
+    
+    
+    
+    function talkWithQuestionCard(){
+        
+        handleTurnChange()
+        raiseUserScore(users[playerTurn-1].name)
+        setQuestionTotal(questionTotal + 1)
     }
 
-    function talkWithQuestionCard(event){
-
-        console.log(event)
-
+    function handleWrongAnswer(){
+        handleTurnChange()
     }
 
     
 
     function raiseUserScore(name){
-        // let id;
+        
         fetch('http://localhost:9292/users').then(res=>res.json()).then(data=>{
-            // console.log(data)
+
             for(let i = data.length-4; i < data.length; i++){
-                // console.log(data[i].name)
+
                 if (data[i].name == name){
-                    // console.log("found", data[i].id)
-                    // console.log(data[i].id)
-                    // id = data[i].id
+
                     fetch(`http://localhost:9292/users/${data[i].id}`, {
                         method: 'PATCH',
                         headers: {'Content-type': 'application/json'}
@@ -75,7 +121,7 @@ function PlayGame({users, updateUsers}){
         })
 
         updateUsers(newArray)
-
+    
     }
 
     const [arrayOfNumbers, setArrayOfNumbers] = useState([])
@@ -88,9 +134,33 @@ useEffect(()=> {
     
 }, [])
 
+
     //fetchArrayOfQuestionNumbers(1)
+    
+    function findWinner(){
+        let highest = 0
+        let winner
+
+        users.map(user=>{
+            if (user.score > highest){
+                highest = user.score
+                winner = user
+            }
+        })
+        return winner
+    }
+    
+    
 
 
+
+    if (gameOver){
+      
+        return(
+            <GameOver winner={findWinner()}  />
+        )
+    }
+    // winnerProps = {winner
 
 
 
@@ -99,7 +169,7 @@ useEffect(()=> {
         <>
         <div className="holder d-flex">
             {/* <button onClick={handleTurnChange} /> */}
-            <button onClick={handleTurnChange} />
+            {/* <button onClick={handleTurnChange} /> */}
             <div className="left ">
             <Container fluid className="m-auto">
                     <Row>
@@ -114,12 +184,12 @@ useEffect(()=> {
                 </Container>
             </div>
             <div className="questionHolder">
-                <button onClick={()=>raiseUserScore(users[playerTurn-1].name)}>update current player score</button>
-                <button onClick={handleTurnChange}> update turn and question number</button>
+                {/* <button onClick={()=>raiseUserScore(users[playerTurn-1].name)}>update current player score</button> */}
+                {/* <button onClick={handleTurnChange}> update turn and question number</button> */}
             <h1 className='questionTitle'>Question #{questionTotal}:</h1>
-                <QuestionCard handleScore={talkWithQuestionCard} arrayOfQuestionNumbers = {arrayOfNumbers}/>
+                <QuestionCard handleWrong={handleWrongAnswer} handleScore={talkWithQuestionCard} arrayOfQuestionNumbers = {arrayOfNumbers}/>
                 <h3 className="round">Round {round}</h3>
-                <h4 className="turn">User {playerTurn}'s Turn</h4>
+                <h4 className="turn">{users[playerTurn-1].name}'s Turn</h4>
             </div>
             <div className="right">
                 <Container fluid className="m-auto">
@@ -139,5 +209,6 @@ useEffect(()=> {
         </>
     )
 }
+
 
 export default PlayGame
